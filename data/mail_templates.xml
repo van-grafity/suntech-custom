@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Email template -->
+        <record id="suntech_mail_template_document_share_reminder" model="mail.template">
+            <field name="name">Purchase Request</field>
+            <field name="model_id" ref="suntech_custom.model_purchase_request"/>
+            <field name="subject">Request Reminder</field>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) | safe}</field>
+            <field name="email_to">vanlaserblack@gmail.com</field>
+            
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle">
+                                                <span style="font-size: 10px;">
+                                                    Document Reminder: <br/>
+                                                    % if object.name:
+                                                        <span style="font-size: 20px; font-weight: bold;">
+                                                            ${object.name | safe}
+                                                        </span>
+                                                    % endif
+                                                </span><br/>
+                                            </td><td valign="middle" align="right">
+                                                <img src="/logo.png?company=${object.create_uid.company_id.id}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${object.create_uid.company_id.name}"/>
+                                            </td></tr>
+                                            <tr><td colspan="2" style="text-align:center;">
+                                              <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="top" style="font-size: 13px;">
+                                                <div>
+                                                    Hi ${object.user_id.name},
+                                                    <br/><br/>
+                                                    We see that a request has not been approved for acceptance in the system. 
+                                                    <br></br>
+                                                    Please look at the request.
+                                                    <br></br>
+                                                    If the request has been seen, please click the “Approve” button to set the status of the request as accepted in the system.
+                                                    <br/><br/>
+                                                    
+                                                    <center>
+                                                        <div style="margin: 16px 0px 16px 0px;">
+                                                            <table border="0" cellpadding="0" cellspacing="10" width="590" style="min-width: 300px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                                 % for line in object.line_ids:
+                                                                <tr align="center">
+                                                                    <td  valign="top" style="font-size: 13px; width: 70%;">
+                                                                        % if line.name:
+                                                                            <b>${line.name | safe}</b>
+                                                                        % endif
+                                                                    </td>
+                                                                    <td valign="top" style="font-size: 13px; width: 15%;">
+                                                                        <a href = "http://127.0.0.1:8013/web#id=26&amp;action=860&amp;model=purchase.request&amp;view_type=form"
+                                                                            style="background-color: #3c509a; min-width: 60px; display: inline-block; text-align: center; padding: 10px 30px 10px 30px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                            View
+                                                                        </a>
+                                                                    </td>
+                                                                    %if line.is_received:
+                                                                    <td valign="top" style="font-size: 13px; width: 15%;">
+                                                                        <p href = ""
+                                                                            style="background-color: #1b7b30; min-width: 60px; display: inline-block; text-align: center;  padding: 10px 30px 10px 30px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px; margin-left: 30px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px;">
+                                                                            Received
+                                                                        </p>
+                                                                    </td>                                       
+                                                                    %else:
+                                                                    <td valign="top" style="font-size: 13px; width: 15%;">
+                                                                        <a href = "${line.link_url | safe}"
+                                                                            style="background-color: #3c509a; min-width: 60px; display: inline-block; text-align: center;  padding: 10px 30px 10px 30px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px; margin-left: 30px;">
+                                                                            Received
+                                                                        </a>
+                                                                    </td>                    
+                                                                    %endif
+                                                                </tr>
+                                                                % endfor
+                                                            </table>
+                                                        </div>
+                                                    </center>
+                                                    <!-- Remarks :
+                                                        <div>
+                                                            ${object.remark | safe}
+                                                        </div> -->
+                                                    <br/>
+                                                    This is an automated reminder
+                                                    <br/>
+                                                    % if user and user.signature:
+                                                        ${user.signature | safe}
+                                                    % endif
+                                                    <br/>
+                                                        
+                                                </div>
+                                            </td></tr>
+                                            <tr><td style="text-align:center;">
+                                              <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle" align="left">
+                                                ${object.create_uid.company_id.name}
+                                            </td></tr>
+                                            <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                                                ${object.create_uid.company_id.phone}
+                                                % if object.create_uid.company_id.email
+                                                    | <a href="'mailto:%s' % ${object.create_uid.company_id.email}" style="text-decoration:none; color: #454748;">${object.create_uid.company_id.email}</a>
+                                                % endif
+                                                % if object.create_uid.company_id.website
+                                                    | <a href="'%s' % ${object.create_uid.company_id.website}" style="text-decoration:none; color: #454748;">
+                                                    ${object.create_uid.company_id.website}
+                                                </a>
+                                                % endif
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                    </td>
+                    </tr>
+                </table>
+            </field>
+            <field name="lang">${object.create_uid.lang}</field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

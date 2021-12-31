@@ -1,0 +1,46 @@
+/*.o_field_widget.o_field_text, .o_field_widget.oe_form_field_text .oe_form_text_content {
+    width: 100%;
+    white-space: pre-wrap;
+    background: #2e2e2e;
+    color: white;
+}*/
+
+
+.o_documents_kanban .o_documents_inspector .o_documents_inspector_info .o_inspector_fields textarea {
+    border: 1px solid transparent;
+    background-color: #2E2E2E;
+    padding: 4px 8px;
+    color: #cccccc;
+}
+
+
+.o_list_view .o_optional_columns .o_optional_columns_dropdown {
+    margin-top: 30px;
+    user-select: none;
+    overflow: auto;
+    max-height: 500px;
+}
+
+.o_graph_buttons.o_dashboard_subview_buttons .dropdown-menu.show.o_dropdown_menu.o_group_by_menu.show {
+    display: block;
+    /*transform: translate3d(99px, 0, 0px) !important;*/
+    transform: translate3d(99px, 33px, 0px)!important;
+}
+
+.o_controller_with_searchpanel .o_renderer_with_searchpanel {
+    min-height: 490px;
+}
+
+
+/*.o_filters_menu, .o_group_by_menu, .o_time_range_menu {
+    max-height: calc(100vh - 125px);
+    overflow: auto;
+    transform: translate3d(99px, 0, 0px) !important;
+}*/
+
+#the-canvas {
+  border: 1px solid black;
+  direction: ltr;
+}
+
+

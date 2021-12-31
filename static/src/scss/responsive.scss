@@ -1,0 +1,72 @@
+
+@media(max-width: 1920px){ 
+    #the-canvas {
+        border: 1px solid black;
+        direction: ltr;
+        max-width: 1700px;
+      }
+      
+      .modal.show .modal-dialog {
+            transform: none;
+            margin-top: 100px;
+        }
+  
+}
+
+@media(max-width: 1366px){ 
+    #the-canvas {
+        border: 1px solid black;
+        direction: ltr;
+        max-width: 1000px;
+      }
+      
+      .modal.show .modal-dialog {
+            transform: none;
+            margin-top: 100px;
+        }
+  
+}
+
+@media(max-width: 991px){ 
+    #the-canvas {
+        border: 1px solid black;
+        direction: ltr;
+        max-width: 960px;
+      }
+      
+      .modal.show .modal-dialog {
+            transform: none;
+            margin-top: 100px;
+        }
+	
+}
+
+@media(max-width: 768px){ 
+    #the-canvas {
+        border: 1px solid black;
+        direction: ltr;
+        max-width: 750px;
+      }
+      
+      .modal.show .modal-dialog {
+            transform: none;
+            margin-top: 100px;
+        }
+	
+}
+
+
+@media(max-width: 480px){ 
+    #the-canvas {
+        border: 1px solid black;
+        direction: ltr;
+        max-width: 450px;
+      }
+      
+      .modal.show .modal-dialog {
+            transform: none;
+            margin-top: 100px;
+        }
+	
+}
+

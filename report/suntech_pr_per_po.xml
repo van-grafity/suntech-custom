@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="pr_per_po_template">
+            <table width="100%">
+                <tr>
+                    <td colspan="3" width="50%">
+                        <!-- <img t-att-src="'data:image/png;base64,%s' % to_text(o.order_id.company_id.logo)" style="max-height: 100px;"/> -->
+                    </td>
+                    <td class="text-right" rowspan="4" width="30%"/>
+                    <td class="text-center" rowspan="4" width="20%">
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <strong>SUMMARY OF PURCHASE ITEM FROM 01 JULY UNTIL 31 JULY 2021</strong>
+            <br/>
+            <table>
+                <table width="100%" style="font-size: 14px;">
+                    <tr style="padding-top: 2px; padding-bottom: 2px;">
+                        <td width="14%">DEPARTMENT</td>
+                        <td>:</td>
+                        <!-- <td><span t-field="o.department_id"/></td> -->
+                    </tr>
+                    <tr style="padding-top: 2px; padding-bottom: 2px;">
+                        <td width="14%">PIC</td>
+                        <td>:</td>
+                        <!-- <td><span t-esc="o.get_table_purchase()"/></td> -->
+                    </tr>
+                     <tr style="padding-top: 2px; padding-bottom: 2px;">
+                        <td width="14%">Total Amount Of IDR</td>
+                        <td>:</td>
+                        <!-- <td><span t-field="o.name"/></td> -->
+                    </tr>
+                    <tr style="padding-top: 2px; padding-bottom: 2px;">
+                        <td width="14%">Total Amount Of SGD</td>
+                        <td>:</td>
+                        <!-- <td><span t-field="o.order_id.name"/></td> -->
+                    </tr>
+                    <tr style="padding-top: 2px; padding-bottom: 2px;">
+                        <td width="14%">Total Amount Of USD</td>
+                        <td>:</td>
+                        <!-- <td><span t-field="o.order_id.name"/></td> -->
+                    </tr>
+                </table>
+                <br/>
+                <span><b>REMARKS : PLEASE ENSURE THE QUALITY AND FEEDBACK IF ANY COMPLAIN.</b></span>
+                <br/>
+                <!-- <table>
+                    <thead>
+                    <tr>
+                        <th width="12%">
+                            <strong>Acknowledge By:</strong>
+                        </th>
+                        <th width="12%">
+                            <strong>Approved By:</strong>
+                        </th>
+                    </tr>
+                </thead>
+                </table> -->
+                <br/>
+                
+                <br/>
+                <table width="100%" class="table table-condensed table-bordered" style="font-size: 14px;">
+                    <thead>
+                        <th class="text-center">PR NO</th>
+                        <th class="text-center">DATE</th>
+                        <th class="text-center">P/O NO</th>
+                        <th class="text-center">SUPPLIER</th>
+                        <th class="text-center">ITEM</th>
+                        <th class="text-center">DO DATE</th>
+                        <th class="text-center">DO NO</th>
+                        <th class="text-center">QTY</th>
+                        <th class="text-center">UNIT</th>
+                        <th class="text-center">CCY</th>
+                        <th class="text-center">PO PRICE</th>
+                        <th class="text-center">TOTAL AMOUNT</th>
+                        <th class="text-center">USAGE</th>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="o">
+                            <tr>
+                                <td><span class="text-nowrap" t-esc="o.name"/></td>
+                                <!-- <td><span class="text-nowrap" t-esc="o.purchase_request_lines"/></td> -->
+                                
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </table>
+        </template>
+
+        <template id="report_pr_per_po">
+            <t t-call="web.html_container">
+                <!-- <t t-foreach="docs" t-as="x"> -->
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <t t-call="suntech_custom.pr_per_po_template"/>
+                        </div>
+                    </t>
+                <!-- </t> -->
+            </t>
+        </template>
+
+        <record id="paperformat_autopacking_no_header" model="report.paperformat">
+            <field name="name">Paper Autopacking No Header</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">80</field>
+        </record>
+
+         <report
+            id="action_report_pr_per_po"
+            model="purchase.order"
+            string="PR per PO (PDF)"
+            report_type="qweb-pdf"
+            file="suntech_custom.report_pr_per_po" 
+            name="suntech_custom.report_pr_per_po"
+            paperformat="suntech_custom.paperformat_autopacking_no_header"
+        />
+    </data>
+</odoo>

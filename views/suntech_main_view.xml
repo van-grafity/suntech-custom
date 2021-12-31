@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_request_view_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.request.view.form.inherit</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook/page/field[@name='line_ids']" position="after">
+                <group name="remark" col="8">
+                    <group colspan="8">
+                        <field name="remark" nolabel="1" placeholder="Terms and conditions..."/>
+                    </group>
+                    <div class="oe_clear"/>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='remark']" position="before">
+                <field name="is_users" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='assigned_to']" position="replace">
+                <field name="employee_id"/>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name="dept_id" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='date_start']" position="after">
+                <field name="datett_start" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record id="purchase_request_view_tree_inherit" model="ir.ui.view">
+        <field name="name">purchase.request.view.tree.inherit</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_start']" position="replace">
+                <field name="datetime_start" />
+            </xpath>
+        </field>
+    </record> -->
+
+    <record id="suntech_purchase_order_view_form_inherit" model="ir.ui.view">
+        <field name="name">suntech.purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="department_id" widget="many2many_tags"/>
+            </xpath> -->
+            
+            <xpath expr="/form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="department_id" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record id="purchase_order_view_tree_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.view.tree.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="department_id"/>
+            </xpath>
+        </field>
+    </record> -->
+
+    <!-- <record id="suntech_purchase_order_view_search_inherit" model="ir.ui.view">
+        <field name="name">suntech.purchase.order.search.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter name="my_Orders" string="By Department" domain="[('department_id', '=', 'MOLDING')]"/>
+            </xpath>
+        </field>
+    </record> -->
+
+    <record id="suntech_res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">suntech.res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="/form/sheet/group/group/field[@name='vat']" position="after">
+                <field name="incoterm_id"/>
+            </xpath> -->
+            <xpath expr="//group[@name='purchase']/field[@name='property_supplier_payment_term_id']" position="after">
+                <field name="incoterm_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="suntech_hr_department_form_inherit" model="ir.ui.view">
+        <field name="name">suntech.hr.department.form.inherit</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='name']" position="after">
+                <field name="head_department_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem
+        action="suntech_custom.action_suntech_purchase_department_wizard" id="menu_purchase_by_department" name="Purchase Information"
+        parent="purchase.menu_product_in_config_purchase" sequence="21" />
+
+    <!-- <report
+        id="action_report_purchase_requests"
+        model="purchase.request"
+        string="Multiple PO (PDF)"
+        report_type="qweb-pdf"
+        name="purchase_request.report_purchase_request"
+        file="purchase_request.report_purchase_request"
+    /> -->
+        
+</odoo>
